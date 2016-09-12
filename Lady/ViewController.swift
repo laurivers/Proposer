@@ -13,57 +13,57 @@ class ViewController: UIViewController {
 
     @IBAction func choosePhoto() {
 
-        let photos: PrivateResource = .Photos
+        let photos: PrivateResource = .photos
 
         proposeToAccess(photos, agreed: {
             print("I can access Photos. :]\n")
 
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.savedPhotosAlbum) {
                 let imagePicker = UIImagePickerController()
-                imagePicker.sourceType = .SavedPhotosAlbum
+                imagePicker.sourceType = .savedPhotosAlbum
 
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
 
         }, rejected: {
-            self.alertNoPermissionToAccess(photos)
+            self.alertNoPermissionToAccess(resource: photos)
         })
     }
 
     @IBAction func takePhoto() {
 
-        let camera: PrivateResource = .Camera
+        let camera: PrivateResource = .camera
 
         proposeToAccess(camera, agreed: {
             print("I can access Camera. :]\n")
 
-            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera){
+            if UIImagePickerController.isSourceTypeAvailable(.camera){
                 let imagePicker = UIImagePickerController()
-                imagePicker.sourceType = .Camera
+                imagePicker.sourceType = .camera
 
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
             }
 
         }, rejected: {
-            self.alertNoPermissionToAccess(camera)
+            self.alertNoPermissionToAccess(resource: camera)
         })
     }
 
     @IBAction func recordAudio() {
 
-        let microphone: PrivateResource = .Microphone
+        let microphone: PrivateResource = .microphone
 
         proposeToAccess(microphone, agreed: {
             print("I can access Microphone. :]\n")
 
         }, rejected: {
-            self.alertNoPermissionToAccess(microphone)
+            self.alertNoPermissionToAccess(resource: microphone)
         })
     }
 
     @IBAction func readContacts() {
 
-        let contacts: PrivateResource = .Contacts
+        let contacts: PrivateResource = .contacts
 
         let propose: Propose = {
 
@@ -71,46 +71,46 @@ class ViewController: UIViewController {
                 print("I can access Contacts. :]\n")
 
             }, rejected: {
-                self.alertNoPermissionToAccess(contacts)
+                self.alertNoPermissionToAccess(resource: contacts)
             })
         }
 
-        showProposeMessageIfNeedFor(contacts, andTryPropose: propose)
+        showProposeMessageIfNeedFor(resource: contacts, andTryPropose: propose)
     }
 
     @IBAction func shareLocation() {
 
-        let location: PrivateResource = .Location(.WhenInUse)
+        let location: PrivateResource = .location(.whenInUse)
         
         proposeToAccess(location, agreed: {
             print("I can access Location. :]\n")
             
         }, rejected: {
-            self.alertNoPermissionToAccess(location)
+            self.alertNoPermissionToAccess(resource: location)
         })
     }
 
     @IBAction func addReminder() {
 
-        let reminders: PrivateResource = .Reminders
+        let reminders: PrivateResource = .reminders
 
         proposeToAccess(reminders, agreed: { 
             print("I can access Reminders. :]\n")
 
         }, rejected: {
-            self.alertNoPermissionToAccess(reminders)
+            self.alertNoPermissionToAccess(resource: reminders)
         })
     }
 
     @IBAction func addCalendarEvent() {
 
-        let calendar: PrivateResource = .Calendar
+        let calendar: PrivateResource = .calendar
 
         proposeToAccess(calendar, agreed: {
             print("I can access Calendar. :]\n")
 
         }, rejected: {
-            self.alertNoPermissionToAccess(calendar)
+            self.alertNoPermissionToAccess(resource: calendar)
         })
     }
 }
